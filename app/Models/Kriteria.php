@@ -9,7 +9,9 @@ class Kriteria extends Model
 {
     use HasFactory;
 
-    protected $fillabel = ['kode', 'nama', 'tipe', 'bobot', 'keterangan'];
+    protected $table = 'kriteria';
+
+    protected $fillable = ['kode', 'nama', 'tipe', 'bobot', 'keterangan'];
 
     public function subKriteria()
     {

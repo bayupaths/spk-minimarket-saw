@@ -19,7 +19,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('minimarket.index') }}">Minimarket</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Kriteria</a>
+                        <a class="dropdown-item" href="{{ route('kriteria.index') }}">Kriteria</a>
                         <a class="dropdown-item" href="#">Sub Kriteria</a>
                     </div>
                 </li>

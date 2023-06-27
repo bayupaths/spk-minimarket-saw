@@ -21,4 +21,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::resource('kriteria', '\App\Http\Controllers\KriteriaController');
 Route::resource('minimarket', '\App\Http\Controllers\MinimarketController');

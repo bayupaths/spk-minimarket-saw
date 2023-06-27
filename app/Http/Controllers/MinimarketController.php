@@ -84,10 +84,11 @@ class MinimarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Minimarket $minimarket)
+    public function update(Request $request, $id)
     {
+        $minimarket = Minimarket::findOrfail($id);
         $validateData = $request->validate([
-            'kode' => 'required|unique:minimarkets,kode' . $minimarket->id,
+            'kode' => 'required|unique:minimarkets,kode,' . $minimarket->id,
             'nama' => 'required|max:225',
             'alamat' => 'required',
             'telepon' => 'required'
@@ -103,8 +104,9 @@ class MinimarketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Minimarket $minimarket)
+    public function destroy($id)
     {
+        $minimarket = Minimarket::findOrfail($id);
         $minimarket->delete();
         return redirect()->route('minimarket.index');
     }

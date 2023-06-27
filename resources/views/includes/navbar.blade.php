@@ -20,7 +20,7 @@
                         <a class="dropdown-item" href="{{ route('minimarket.index') }}">Minimarket</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('kriteria.index') }}">Kriteria</a>
-                        <a class="dropdown-item" href="#">Sub Kriteria</a>
+                        <a class="dropdown-item" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a>
                     </div>
                 </li>
                 <li class="nav-item">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SubKriteria;
+use App\Models\Kriteria;
 
 class SubKriteriaController extends Controller
 {
@@ -13,7 +15,12 @@ class SubKriteriaController extends Controller
      */
     public function index()
     {
-        //
+        $subKriteria = SubKriteria::with(['kriteria'])->get();
+        $kriteria = Kriteria::all();
+        return view('pages.sub_kriteria.index', [
+            'subKriteria' => $subKriteria,
+            'kriteria' => $kriteria
+        ]);
     }
 
     /**
@@ -34,7 +41,15 @@ class SubKriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'kriteria_id' => 'required',
+            'nilai' => 'required|between:0,99.99',
+            'keterangan' => 'required'
+        ]);
+
+        $subKriteria = new SubKriteria();
+        $subKriteria->create($validateData);
+        return redirect()->route('sub_kriteria.index');
     }
 
     /**
@@ -56,7 +71,14 @@ class SubKriteriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subKriteria = SubKriteria::with(['kriteria'])->get();
+        $subKriteriaUpdate = SubKriteria::with('kriteria')->find($id);
+        $kriteria = Kriteria::all();
+        return view('pages.sub_kriteria.edit', [
+            'subKriteria' => $subKriteria,
+            'subKriteriaUpdate' => $subKriteriaUpdate,
+            'kriteria' => $kriteria
+        ]);
     }
 
     /**
@@ -68,7 +90,14 @@ class SubKriteriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subKriteria = SubKriteria::findOrFail($id);
+        $validateData = $request->validate([
+            'kriteria_id' => 'required',
+            'nilai' => 'required|between:0,99.99',
+            'keterangan' => 'required'
+        ]);
+        $subKriteria->update($validateData);
+        return redirect()->route('sub_kriteria.index');
     }
 
     /**
@@ -79,6 +108,8 @@ class SubKriteriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subKriteria = SubKriteria::findOrFail($id);
+        $subKriteria->delete();
+        return redirect()->route('sub_kriteria.index');
     }
 }

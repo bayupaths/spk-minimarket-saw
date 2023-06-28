@@ -9,6 +9,8 @@ class Penilaian extends Model
 {
     use HasFactory;
 
+    protected $table = 'penilaian';
+
     protected $fillable = ['minimarket_id', 'kriteria_id', 'sub_kriteria_id', 'nilai'];
 
     public function minimarket()

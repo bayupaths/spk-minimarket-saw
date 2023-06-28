@@ -24,10 +24,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Penilaian</a>
+                    <a href="{{ route('penilaian.index') }}" class="nav-link">Penilaian</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Hasil</a>
+                    <a href="{{ route('hasil.index') }}" class="nav-link">Hasil</a>
                 </li>
                 @guest
                     <li class="nav-item">

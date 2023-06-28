@@ -57,7 +57,7 @@
                             <h5 class="text-center">Tabel Data Minimarket</h5>
                         </div>
                         <div class="card-body">
-                            <table class="table table-condensed">
+                            <table class="table table-responsive-sm table-condensed">
                                 <thead>
                                     <tr>
                                         <th>ID</th>

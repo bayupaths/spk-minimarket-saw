@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Minimarket;
+use App\Models\Kriteria;
+use App\Models\SubKriteria;
+use App\Models\Penilaian;
 
 class PenilaianController extends Controller
 {
@@ -13,7 +17,14 @@ class PenilaianController extends Controller
      */
     public function index()
     {
-        //
+        $minimarkets = Minimarket::all();
+        $kriteria = Kriteria::all();
+        $subKriteria = SubKriteria::all();
+        return view('pages.penilaian.index', [
+            'minimarkets' => $minimarkets,
+            'kriteria' => $kriteria,
+            'subKriteria' => $subKriteria,
+        ]);
     }
 
     /**
@@ -34,7 +45,22 @@ class PenilaianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'minimarket_id' => 'required',
+            'kriteria_id' => 'required',
+            'sub_kriteria_id' => 'required',
+        ]);
+
+        $kriterias = $request->input('kriteria_id');
+        $subKriteria = $request->input('sub_kriteria_id');
+        foreach ($kriterias as $key => $kriteria) {
+            $data = new Penilaian;
+            $data->minimarket_id = $request->input('minimarket_id');
+            $data->kriteria_id = $kriteria;
+            $data->sub_kriteria_id = $subKriteria[$key];
+            $data->save();
+        }
+        return redirect()->route('penilaian.index');
     }
 
     /**

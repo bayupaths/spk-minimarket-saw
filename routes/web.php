@@ -24,3 +24,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('kriteria', '\App\Http\Controllers\KriteriaController');
 Route::resource('minimarket', '\App\Http\Controllers\MinimarketController');
 Route::resource('sub_kriteria', '\App\Http\Controllers\SubKriteriaController');
+Route::resource('penilaian', '\App\Http\Controllers\PenilaianController');
+Route::resource('hasil', '\App\Http\Controllers\HasilController');

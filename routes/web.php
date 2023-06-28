@@ -13,16 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::resource('kriteria', '\App\Http\Controllers\KriteriaController');
-Route::resource('minimarket', '\App\Http\Controllers\MinimarketController');
-Route::resource('sub_kriteria', '\App\Http\Controllers\SubKriteriaController');
-Route::resource('penilaian', '\App\Http\Controllers\PenilaianController');
-Route::resource('hasil', '\App\Http\Controllers\HasilController');
+Route::middleware('auth')->group(function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('kriteria', '\App\Http\Controllers\KriteriaController');
+    Route::resource('minimarket', '\App\Http\Controllers\MinimarketController');
+    Route::resource('sub_kriteria', '\App\Http\Controllers\SubKriteriaController');
+    Route::resource('penilaian', '\App\Http\Controllers\PenilaianController');
+    Route::resource('hasil', '\App\Http\Controllers\HasilController');
+});

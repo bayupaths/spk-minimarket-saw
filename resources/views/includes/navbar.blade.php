@@ -8,8 +8,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a href="#" class="nav-link">Beranda</a>
+                <li class="nav-item {{ request()->is('home') ? 'active' : '' }}">
+                    <a href="{{ route('home') }}" class="nav-link">Beranda</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -23,32 +23,26 @@
                         <a class="dropdown-item" href="{{ route('sub_kriteria.index') }}">Sub Kriteria</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('penilaian') ? 'active' : '' }}">
                     <a href="{{ route('penilaian.index') }}" class="nav-link">Penilaian</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('hasil') ? 'active' : '' }}">
                     <a href="{{ route('hasil.index') }}" class="nav-link">Hasil</a>
                 </li>
-                @guest
-                    <li class="nav-item">
-                        <a href="#" class="btn btn-success nav-link px-4 text-white">Login</a>
-                    </li>
-                @endguest
             </ul>
 
             @auth
                 <ul class="navbar-nav d-none d-lg-flex">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown">
-                            <img src="/images/icon-user.png" alt="Profile" class="rounded-circle mr-2 profile-picture" />
-                            Hi, Bayu Purnomo
+                            Hi, {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu">
-                            <a href=""
+                            <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                           document.getElementById('logout-form').submit();"
                                 class="dropdown-item">Logout</a>
-                            <form id="logout-form" action="" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -58,7 +52,7 @@
                 <!-- Mobile Menu -->
                 <ul class="navbar-nav d-block d-lg-none">
                     <li class="nav-item">
-                        <a href="" class="nav-link"> Hi, Bayu Purnomo </a>
+                        <a href="" class="nav-link"> Hi, {{ Auth::user()->name }} </a>
                     </li>
                 </ul>
             @endauth
